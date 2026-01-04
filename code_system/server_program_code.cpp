@@ -11,14 +11,20 @@ using namespace httplib;
 int main(){
     SSLServer srv("server_program_code.ca.cert","server_program_code.ca.key");
     
-    srv.Get("/Data_receiving",[](const Request &,Response &res){
-        res.set_content("json_message","application/json");
+    srv.Post("/Data_receiving",[](const Request &req ,Response &res){
+        string received_json = req.body;
 
-    });
-    
+        cout << "Received JSON: " << received_json << std::endl;
+
+        
+        res.set_content("{\"status\":\"ok\"}", "application/json");
+
+    });    
+
     cout << "Server start listen" << endl;
+   
     
-    srv.listen("0.0.0.0",5001);
+    srv.listen("0.0.0.0",8443);
 
     return 0;
 
