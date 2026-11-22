@@ -1,9 +1,9 @@
 echo "OpenSSL start"
 
-openssl genrsa -out private.key 2048
+openssl genrsa -out server_program_code.ca.key 2048
 
-openssl req -new -key private.key -out request.csr
+openssl req -new -key server_program_code.ca.key -out server.csr
 
-openssl x509 -req -in request.csr -signkey private.key -out certificate.crt -days 365
+openssl x509 -req -in server.csr -signkey server_program_code.ca.key -out server_program_code.ca.cert -days 365
 
 echo "All OpenSSL commands completed"
